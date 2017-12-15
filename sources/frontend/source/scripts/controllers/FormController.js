@@ -1,9 +1,13 @@
 import AppService from '../services/AppService.js';
+import DataBaseService from '../services/DataBaseService.js'
+import MapController from '../controllers/MapController.js'
 
 class FormController{
 
     constructor(){
         this.service = new AppService();
+        this.dataBase = new DataBaseService();
+        this.map = new MapController();
         this.getFields();
     }
 
@@ -42,13 +46,17 @@ class FormController{
             
             _form.appendChild(_input);
         }
+
+        this.setListeners();
+        this.map.initMap();
+
     }
 
     setListeners() {
        let _form = document.getElementById("form");
-
-       _form.addEventListener("submit", (event)=>{
-           event.preventDefault();
+        
+       _form.addEventListener("submit", (e)=>{
+           e.preventDefault();
            this.sendUserData(event);
        })
     }
@@ -59,17 +67,11 @@ class FormController{
         _cpf = document.getElementById("txtCPF").value;
         _phone = document.getElementById("txtPhone").value;
         _address = document.getElementById("txtAddress").value;
-        _file = document.getElementById("txtFile").value;
+        _file = document.getElementById("uplImage").value;
 
-        console.log({
-            "nome": _name,
-            "cpf": _cpf,
-            "phone": _phone,
-            "address": _address,
-            "file": _file
-        })
-        this.service.saveData({
-            "nome" : _name,
+        
+        this.dataBase.saveData({
+            "name" : _name,
             "cpf" : _cpf,
             "phone" : _phone,
             "address" : _address,

@@ -1,6 +1,8 @@
 import AppService from './services/AppService';
 import AppController from './controllers/AppController';
 import FormController from './controllers/FormController';
+import ListDataController from './controllers/ListDataController';
+import MapController from './controllers/MapController';
 
 
 class AppMain {
@@ -8,6 +10,8 @@ class AppMain {
         new AppService();
         new AppController();
         new FormController();
+        new ListDataController();
+        new MapController();
     }
     
 }

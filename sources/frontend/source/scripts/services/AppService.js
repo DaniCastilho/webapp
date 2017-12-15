@@ -20,14 +20,6 @@ class AppService{
         })
     }
 
-    saveData(userData){
-        let _storage = localStorage;
-        console.log(userData)
-        // localStorage.setItem(userData.name);
-        // localStorage.setItem(userData.cpf);
-        // localStorage.setItem(userData.telefone);
-        // localStorage.setItem(userData.endereco);
-        // localStorage.setItem(userData.file);
-    }
+
 }
 export default AppService;
