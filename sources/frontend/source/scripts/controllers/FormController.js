@@ -36,6 +36,9 @@ class FormController{
         _form.setAttribute("id", "form");
         _container.appendChild(_form);
         
+        let _map = document.createElement("div");
+        _map.setAttribute("id", "map");
+        
         for(_field of fields){
             let _input = document.createElement("input");
             
@@ -44,12 +47,17 @@ class FormController{
             _input.setAttribute("name", _field.name);
             _input.setAttribute("placeholder", _field.placeholder);
             
+            if(_field.type == "address"){
+                _form.appendChild(_map)
+                
+            }
+            
             _form.appendChild(_input);
         }
-
+        
         this.setListeners();
         this.map.initMap();
-
+        
     }
 
     setListeners() {
