@@ -1,6 +1,7 @@
-import AppService from '../services/AppService.js';
-import DataBaseService from '../services/DataBaseService.js'
-import MapController from '../controllers/MapController.js'
+import AppService from '../services/AppService';
+import DataBaseService from '../services/DataBaseService'
+import MapController from '../controllers/MapController'
+import MaskController from '../controllers/MaskController'
 
 class FormController {
 
@@ -8,7 +9,9 @@ class FormController {
         this.service = new AppService();
         this.dataBase = new DataBaseService();
         this.map = new MapController();
+        this.mask = new MaskController();
         this.getFields();
+
     }
 
     getFields() {
@@ -46,9 +49,10 @@ class FormController {
             _input.setAttribute("id", _field.id);
             _input.setAttribute("name", _field.name);
             _input.setAttribute("placeholder", _field.placeholder);
+            _input.required = true;
 
             _form.appendChild(_input);
-
+           
 
             if (_field.type == "address") {
                 _form.appendChild(_map); 
@@ -57,17 +61,35 @@ class FormController {
         }
 
         this.setListeners();
+        this.setPatterns();
         this.map.initMap();
-
     }
 
     setListeners() {
         let _form = document.getElementById("form");
+        let _fieldCpf = document.getElementById("txtCPF");
+        let _fieldPhone = document.getElementById("txtPhone");
 
         _form.addEventListener("submit", (e) => {
             e.preventDefault();
             this.sendUserData(event);
         })
+
+
+        _fieldCpf.addEventListener("keyup", (e)=>{
+            this.mask.setMask(e.currentTarget, "cpfMask");
+        })
+
+    }
+
+    setPatterns(){
+        let _fieldName = document.getElementById("txtFullname");
+        let _fieldCpf = document.getElementById("txtCPF");
+        let _fieldPhone = document.getElementById("txtPhone");
+ 
+        _fieldName.setAttribute("pattern", "[A-Za-z]");
+        _fieldCpf.setAttribute("pattern", "[0-9]");
+        _fieldPhone.setAttribute("pattern", "[0-9]");
     }
     sendUserData() {
         let _name, _cpf, _phone, _address, _file;
@@ -86,10 +108,9 @@ class FormController {
             "address": _address,
             "file": _file
         })
+        
     }
-
-
-
 }
+
 
 export default FormController;
