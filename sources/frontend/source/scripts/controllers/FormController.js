@@ -61,7 +61,7 @@ class FormController {
         }
 
         this.setListeners();
-        this.setPatterns();
+        // this.setPatterns();
         this.map.initMap();
     }
 
@@ -76,9 +76,9 @@ class FormController {
         })
 
 
-        _fieldCpf.addEventListener("keyup", (e)=>{
-            this.mask.setMask(e.currentTarget, "cpfMask");
-        })
+        // _fieldCpf.addEventListener("keyup", (e)=>{
+        //     this.mask.setMask(e.currentTarget, "cpfMask");
+        // })
 
     }
 
