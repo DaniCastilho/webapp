@@ -16,6 +16,14 @@
         padding-bottom: 0;
 
     }
+    .valid{
+        color:#00C8B3;
+        border-bottom: 1px solid #00C8B3;
+    }
+    .invalid{
+        color: #EB4A46;
+        border-bottom: 1px solid #EB4A46
+    }
     ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
         color:    #efeeed;
     }
@@ -36,5 +44,18 @@
     
     ::placeholder { /* Most modern browsers support this now. */
        color:    #efeeed;
+    }
+
+    input[type="submit"]{
+        color: #DDDCDC;
+        background-color: #F6F6F6;
+        border: none;
+        border-radius: 30px;
+        height: 50px;
+        text-align: center;
+
+        &.valid{
+            background: #00C8B3;
+        }
     }
 }

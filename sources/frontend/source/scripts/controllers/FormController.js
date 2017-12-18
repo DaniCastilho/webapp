@@ -49,19 +49,19 @@ class FormController {
             _input.setAttribute("id", _field.id);
             _input.setAttribute("name", _field.name);
             _input.setAttribute("placeholder", _field.placeholder);
-            _input.required = true;
-
+            
             _form.appendChild(_input);
            
 
             if (_field.type == "address") {
                 _form.appendChild(_map); 
             }
+
             
         }
 
         this.setListeners();
-        // this.setPatterns();
+        this.setPatterns();
         this.map.initMap();
     }
 
@@ -72,7 +72,7 @@ class FormController {
 
         _form.addEventListener("submit", (e) => {
             e.preventDefault();
-            this.sendUserData(event);
+            this.formValidate(event);
         })
 
 
@@ -83,13 +83,30 @@ class FormController {
     }
 
     setPatterns(){
-        let _fieldName = document.getElementById("txtFullname");
         let _fieldCpf = document.getElementById("txtCPF");
         let _fieldPhone = document.getElementById("txtPhone");
  
-        _fieldName.setAttribute("pattern", "[A-Za-z]");
-        _fieldCpf.setAttribute("pattern", "[0-9]");
-        _fieldPhone.setAttribute("pattern", "[0-9]");
+        _fieldCpf.setAttribute("pattern", "\\d{3}.\\d{3}.\\d{3}-\\d{2}");
+        _fieldPhone.setAttribute("pattern", "\\d{11}");
+    }
+
+    formValidate(ev){
+        let _fields = document.querySelectorAll("input");
+        let _field;
+        let _isValid = false;
+        for (_field of _fields){
+            
+            if(_field.value){
+                _isValid = true;
+                _field.setAttribute("class", "valid");
+            }else if(_field.type != "submit"){
+                _field.setAttribute("class", "invalid");
+            }        }
+
+        if(_isValid){
+            this.sendUserData();
+        }
+
     }
     sendUserData() {
         let _name, _cpf, _phone, _address, _file;

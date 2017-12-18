@@ -3,9 +3,14 @@
 .section__wrapper{
     margin: 70px auto 0 auto; 
     width: 100%;
-    max-width: 300px;
+    max-width: 400px;
     height: 100%;
+
+    &.list{
+        max-width: 960px;
+    }
 }
+
 
 .section__content{
     width: 100%;
